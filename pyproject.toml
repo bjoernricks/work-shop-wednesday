@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "work-shop-wednesday"
+version = "0.1.0"
+description = "Wednesday Workshops"
+authors = ["Björn Ricks <bjoern.ricks@greenbone.net>"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Sphinx = "^5.2.3"
+furo = "^2022.9.29"
+myst-parser = "^0.18.1"
+sphinx-copybutton = "^0.5.0"
+sphinxcontrib-mermaid = "^0.7.1"
+sphinx-autobuild = "^2021.3.14"
+
+[tool.poetry.group.dev.dependencies]
+autohooks-plugin-pylint = ">=22.8.1"
+autohooks-plugin-black = ">=22.8.1"
+autohooks-plugin-isort = ">=22.8.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 80
+target-version = ['py39', 'py310']
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | \.github
+  | \.vscode
+  | _build
+  | build
+  | dist
+  | docs
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 80
+
+[tool.autohooks]
+mode = "poetry"
+pre-commit = [
+  'autohooks.plugins.black',
+  'autohooks.plugins.isort',
+  'autohooks.plugins.pylint',
+]

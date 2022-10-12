@@ -1,5 +1,5 @@
-# Generators
-## What's a Generator
+## Generators
+### What's a Generator
 Python defines three terms:
 * [generator](https://docs.python.org/3/glossary.html#term-generator)
 * [generator iterator](https://docs.python.org/3/glossary.html#term-generator-iterator)
@@ -17,7 +17,7 @@ Current Implementation of Generators has been specified in
 Therefore they are rather old. Maybe that's also the reason why they don't use
 *dunder* methods for their protocol.
 
-## Generator base class (without type hints)
+### Generator base class (without type hints)
 
 ```python
 class Generator:
@@ -100,7 +100,7 @@ print(dir(get_something_generator()))
 The shown list contains the methods `close`, `send` and `throw` actually. Our
 Generator class assumptions seem to be correct!
 
-## Purpose of `close`, `send` and `throw`
+### Purpose of `close`, `send` and `throw`
 
 A new generator function:
 

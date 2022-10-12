@@ -1,5 +1,5 @@
-# Iterators
-## From Generators to Iterators
+## Iterators
+### From Generators to Iterators
 
 Back to our initial very simple generator. What's the `YieldType`, `SendType`
 and `ReturnType` of this generator?
@@ -36,7 +36,7 @@ def get_something_iterator() -> Iterator[str]:
     yield "baz"
 ```
 
-## What's an Iterator
+### What's an Iterator
 
 Citing the Python docs, an Iterator is
 
@@ -44,7 +44,7 @@ Citing the Python docs, an Iterator is
 
 [Source](https://docs.python.org/3/glossary.html#term-iterator)
 
-## Iterator base class
+### Iterator base class
 
 From the definition above we can derive a base class:
 
@@ -168,7 +168,7 @@ Traceback (most recent call last):
 StopIteration
 ```
 
-## For Loop
+### For Loop
 
 Simplified version of a function mimicking a `for ... in` loop behavior to
 print the values of an `Iterator`:
@@ -192,7 +192,7 @@ for value in get_something_iterator():
     print(value)
 ```
 
-## Call Flow
+### Call Flow
 
 What's the interesting thing about `Generators`/`Iterators` and the `yield`
 statement? Let us look at the following call flows:
@@ -266,7 +266,7 @@ coroutines!**
 
 > Coroutines are computer program components that generalize subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed.
 
-## Chaining Iterators
+### Chaining Iterators
 
 ```python
 def get_something_generator():
@@ -298,7 +298,7 @@ for i in another_generator():
     print(i)
 ```
 
-## Links
+### Links
 
 * [Real Python - How to Use Generators and yield in Python](https://realpython.com/introduction-to-python-generators/)
 * [PEP 255 – Simple Generators](https://peps.python.org/pep-0255/)

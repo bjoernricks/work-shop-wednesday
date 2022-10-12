@@ -1,4 +1,4 @@
-# General
+## General
 
 * Python is a dynamic scripting language
 * Python allows for object oriented programming (OOP) but also for functional programming

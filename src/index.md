@@ -1,12 +1,7 @@
 # Welcome to the Work Shop Wednesday!
 
 ```{toctree}
----
-maxdepth: 2
-hidden: True
----
+:maxdepth: 2
 
-general
-generators
-iterators
+python/index
 ```

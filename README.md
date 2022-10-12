@@ -1,6 +1,7 @@
 # Wednesday Workshops
 
-Code, Notes, etc. of our Wednesday Workshops
+Code, Notes, etc. of our Wednesday Workshops.
+Website: https://bjoernricks.github.io/work-shop-wednesday/
 
 ## Installation
 To install the dependencies to build and run the docs run:

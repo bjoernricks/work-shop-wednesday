@@ -340,7 +340,6 @@ import sys
 @contextmanager
 def add_module_path(path: str):
     sys.path.append(path)
-
     try:
         yield
     finally:

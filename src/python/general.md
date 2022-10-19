@@ -12,3 +12,21 @@
     * dunder -> double underscore
     * `__foo__(...)`
     * Most famous the constructor method `def __init__(self)`
+* Functions (and therefore also methods) return `None` implicitly if no return
+  statement is defined or if it has no value.
+  ```python
+  def foo():
+    print("foo")
+  ```
+  is the same as
+  ```python
+  def foo():
+    print("foo")
+    return
+  ```
+  is the same as
+  ```python
+  def foo():
+    print("foo")
+    return None
+  ```

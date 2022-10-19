@@ -7,4 +7,5 @@ generators
 iterators
 yieldfrom
 iterable
+contextmanager
 ```

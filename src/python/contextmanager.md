@@ -90,7 +90,7 @@ The `with` statement is defined as:
 
 ```python
 with EXPRESSION as TARGET:
-    SUITE
+    BLOCK
 ```
 
 where the *as TARGET* part is optional.
@@ -104,7 +104,7 @@ hit_except = False
 
 try:
     TARGET = value
-    SUITE
+    BLOCK
 except:
     hit_except = True
     if not manager.__exit__(*sys.exc_info()):
@@ -126,7 +126,7 @@ returning a truthy value from the `__exit__` method.
 
 ```python
 with A() as a, B() as b:
-    SUITE
+    BLOCK
 ```
 
 is semantically equivalent to:
@@ -134,10 +134,20 @@ is semantically equivalent to:
 ```python
 with A() as a:
     with B() as b:
-        SUITE
+        BLOCK
 ```
 
 [Source](https://docs.python.org/3.10/reference/compound_stmts.html#the-with-statement)
+
+> The Python with statement creates a runtime context that allows you to run
+> a group of statements under the control of a context manager. PEP 343 added
+> the with statement to make it possible to factor out standard use cases of
+> the try … finally statement.
+
+> Compared to traditional try … finally constructs, the with statement can
+> make your code clearer, safer, and reusable.
+
+[Source](https://realpython.com/python-with-statement/#the-with-statement-approach)
 
 ### Implementing a Context Manager using contextlib
 
@@ -211,6 +221,61 @@ def contextmanager(func):
 ```
 
 [Source](https://peps.python.org/pep-0343/#generator-decorator)
+
+### Call Flow
+
+As a class based Context Manager:
+
+```python
+class SimpleContextManager:
+    def __enter__(self):
+        print("acquire")
+        return "resource"
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        print("release")
+
+with SimpleContextManager() as manager:
+    print(manager)
+```
+
+Output:
+
+```python
+>>> with SimpleContextManager() as manager:
+...     print(manager)
+...
+acquire
+resource
+release
+```
+
+Via `contextlib.contextmanager` decorator:
+
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def simple_context_manager():
+    print("acquire")
+    try:
+        yield "resource"
+    finally:
+        print("release")
+
+with simple_context_manager() as manager:
+    print(manager)
+```
+
+Output
+
+```python
+>>> with simple_context_manager() as manager:
+...     print(manager)
+...
+acquire
+resource
+release
+```
 
 ### Example Context Managers
 

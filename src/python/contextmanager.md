@@ -19,6 +19,12 @@ file.close()
 lock = acquire_lock()
 # run code that requires exclusive access
 lock.release()
+
+db = database_open()
+db.transaction()
+# execute SQL statements for example db.execute("INSERT INTO foo VALUES ('bar')")
+db.commit()
+db.close()
 ```
 
 This approach has some drawbacks
@@ -34,8 +40,9 @@ This approach has some drawbacks
 Especially the last item would always require to write code such as:
 
 ```python
+file = open("foo.txt")
+
 try:
-    file = open("foo.txt")
     # do something with the file
 finally:
     file.close()
@@ -301,6 +308,8 @@ class PrintPrefix:
 ```python
 with PrintPrefix("😀") as out:
     out.print("are we happy now?")
+    out.print("yes we are!")
+```
 
 ### Links
 

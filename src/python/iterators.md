@@ -127,7 +127,8 @@ generator.send(None)
 ```
 
 Output:
-```
+
+```python
 >>> generator = get_something_iterator()
 >>> generator.send(None)
 'foo'
@@ -154,7 +155,7 @@ next(iterator)
 
 Output:
 
-```
+```python
 >>> iterator = get_something_iterator()
 >>> next(iterator)
 'foo'
@@ -266,46 +267,15 @@ coroutines!**
 
 > Coroutines are computer program components that generalize subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed.
 
-### Chaining Iterators
-
-```python
-def get_something_generator():
-    yield "foo"
-    yield "bar"
-    yield "baz"
-
-def another_generator():
-    for i in get_something_generator():
-        yield i
-
-for i in another_generator():
-    print(i)
-```
-
-With Python 3.3 and [PEP 380](https://peps.python.org/pep-0380) it can be
-simplified using the `yield from` statement:
-
-```python
-def get_something_generator():
-    yield "foo"
-    yield "bar"
-    yield "baz"
-
-def another_generator():
-    yield from get_something_generator()
-
-for i in another_generator():
-    print(i)
-```
-
 ### Links
 
 * [Real Python - How to Use Generators and yield in Python](https://realpython.com/introduction-to-python-generators/)
+* [Coroutines (practical)](https://tacaswell.github.io/coroutines-i.html)
+* [PEP 234 – Iterators](https://peps.python.org/pep-0234/)
 * [PEP 255 – Simple Generators](https://peps.python.org/pep-0255/)
 * [PEP 342 – Coroutines via Enhanced Generators](https://peps.python.org/pep-0342/)
-* [PEP 380 – Syntax for Delegating to a Subgenerator](https://peps.python.org/pep-0380/)
 * [Generator-iterator methods](https://docs.python.org/3.10/reference/expressions.html#generator-iterator-methods)
-* [Iterator Types](https://docs.python.org/3.10/library/stdtypes.html?highlight=next#iterator-types)
-* [Generator Types](https://docs.python.org/3.10/library/stdtypes.html?highlight=next#generator-types)
+* [Iterator Types](https://docs.python.org/3.10/library/stdtypes.html#iterator-types)
+* [Generator Types](https://docs.python.org/3.10/library/stdtypes.html#generator-types)
 * [collections.abc.Iterator](https://github.com/python/cpython/blob/3.10/Lib/_collections_abc.py#L271)
 * [collections.abc.Generator](https://github.com/python/cpython/blob/3.10/Lib/_collections_abc.py#L322)

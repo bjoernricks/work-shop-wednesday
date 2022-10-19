@@ -10,31 +10,31 @@ Iterators and Generators.
 Chaining `Iterators` without the new `yield from` statement.
 
 ```python
-def get_something_generator():
+def get_something_iterator():
     yield "foo"
     yield "bar"
     yield "baz"
 
-def another_generator():
-    for i in get_something_generator():
+def another_iterator():
+    for i in get_something_iterator():
         yield i
 
-for i in another_generator():
+for i in another_iterator():
     print(i)
 ```
 
 Using the `yield from` statement this can be simplified to:
 
 ```python
-def get_something_generator():
+def get_something_iterator():
     yield "foo"
     yield "bar"
     yield "baz"
 
-def another_generator():
-    yield from get_something_generator()
+def another_iterator():
+    yield from get_something_iterator()
 
-for i in another_generator():
+for i in another_iterator():
     print(i)
 ```
 

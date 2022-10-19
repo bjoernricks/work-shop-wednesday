@@ -6,4 +6,5 @@ general
 generators
 iterators
 yieldfrom
+iterable
 ```

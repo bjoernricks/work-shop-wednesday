@@ -78,5 +78,4 @@ Loop finished with result 3
 ```{admonition} Summary
 * `Task` can wait for results that are currently *blocked*.
 * A `Future` *blocks* until it is done.
-* The `Loop` schedules `Handle` instances.
 ```

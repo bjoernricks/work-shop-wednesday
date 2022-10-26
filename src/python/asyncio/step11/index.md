@@ -65,4 +65,5 @@ Loop finished with result 3
 ```{admonition} Summary
 * Using a callback abstraction makes the scheduling more generic.
 * Our loop can schedule and run all kind of things using a callback.
+* Internally the `Loop` schedules `Handle` instances.
 ```

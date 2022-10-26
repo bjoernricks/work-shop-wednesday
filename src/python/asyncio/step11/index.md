@@ -2,9 +2,9 @@
 
 The `Loop` is currently stuck to schedule `Task`s and run coroutines.
 We could introduce a new `Protocol` to abstract the scheduling of `Tasks` but
-at the end we just need to scheduling some callbacks (which are actually
-`Callable`s) and together with their arguments. Therefore we introduce an
-internal class `Handler`.
+at the end we just need to schedule some callbacks (which are actually
+`Callable`s) and their arguments. Therefore we introduce an internal class
+`Handler`.
 
 ```{literalinclude} handle.py
 :language: python

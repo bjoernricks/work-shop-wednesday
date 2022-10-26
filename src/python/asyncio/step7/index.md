@@ -24,6 +24,10 @@ result. Additionally a `Future` can be in one of the following states:
 
 It always takes (at least) two generator steps to get the into the done state.
 
+```{note}
+As a side note, the Future class implements the `Iterable` protocol.
+```
+
 Example:
 
 ```python
@@ -33,13 +37,44 @@ def future_result(future):
 future = Future()
 coroutine = future_result(future)
 next(coroutine)
+
+# the result of the future is set somewhere
+# we just fake setting it here
 future.set_result(123)
+
 try:
     next(coroutine)
 except StopIteration as e:
     result = e.value
     print(result)
 ```
+
+````{hint}
+To clarify how the `Future` works, `future_result` could be rewritten as
+
+```python
+def future_result(future):
+    # __iter__ implements the Iterable protocol and
+    # returns a coroutine/generator/iterator
+    coroutine = future.__iter__()
+    return (yield from coroutine)
+```
+
+or even more detailed without `yield from`
+
+```python
+def future_result(future):
+    # __iter__ implements the Iterable protocol and
+    # returns a coroutine/generator/iterator
+    coroutine = future.__iter__()
+    try:
+        while True:
+            x = next(coroutine)
+            yield x
+    except StopIteration as e:
+        return e.value
+```
+````
 
 As a result we have an object that allows to set a result (even) in a future
 step.
@@ -52,7 +87,7 @@ def do_something(future):
     # * start a thread
     # * wait for something being returned from the thread via a callback
     def on_result_from_thread(result):
-        future.set_result()
+        future.set_result(result)
 
     thread = thread.create()
     thread.on_exit = on_result_from_thread
@@ -76,10 +111,6 @@ Loop step 1
 Loop step 2
 Loop step 3
 Loop finished with result 3
-```
-
-```{note}
-As a side note, the Future class implements the `Iterable` protocol.
 ```
 
 ```{admonition} Summary

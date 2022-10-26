@@ -27,8 +27,11 @@ main 1
 Loop finished with result 3
 ```
 
-As you can see there is still no real concurrency. Yes we can suspend the
-current function but we still run all coroutines sequentially.
+As you can see there is still no real concurrency. Only a single coroutines is
+run until it is finished before another one is called.
+
+Yes we can suspend the current function but we still run all coroutines
+sequentially.
 
 To change that we need a new thing.
 1. This thing should take a coroutine, because all our business logic uses
@@ -55,9 +58,9 @@ from `Future`. A job can be worked on in a task. So let's call this new thing
 ```
 ````
 
-The `Future` class got a done method to check if the result has been set and
-also a result method to allow accessing the result from the outside of the
-class. Now it is possible to check wether the state of the `Future` is done.
+The `Future` class got a `done` method to check if the result has been set and
+also a `result` method to allow accessing the result from the outside of the
+class. Now it is possible to check whether the state of the `Future` is done.
 Additionally it is possible to pass a name to identify the `Future` via
  `__repr__` more easily in later steps for debugging purposes.
 

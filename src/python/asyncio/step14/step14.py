@@ -11,7 +11,10 @@ from wait import wait
 
 def create_socket(host):
     # just create a socket connection to a host
-    return  # a socket
+    sock = socket.socket()
+    sock.setblocking(False)
+    sock.connect(host)
+    return sock  # a socket
 
 
 class Loop:
@@ -22,7 +25,7 @@ class Loop:
     def __init__(self):
         self._running = False
         self._scheduled = []
-        self._selector = None  # Some Selector class
+        self._selector = Selector()  # Some Selector class
 
     @classmethod
     def get_current_loop(cls):
@@ -37,6 +40,7 @@ class Loop:
             timeout = 0  # just get the sockets with data
 
         # wait and block for data depending on the timeout
+        # returns an iterable of handles which corresponding sockets have data
         handles = self._selector.select(timeout)
         if handles:
             self._scheduled.extend(handles)

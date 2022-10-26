@@ -51,7 +51,7 @@ sequenceDiagram
   deactivate c
   activate g2
   activate g2
-  g2->>c: yield
+  g2-->>c: yield
   deactivate g2
   activate c
   c->>g1: send/next

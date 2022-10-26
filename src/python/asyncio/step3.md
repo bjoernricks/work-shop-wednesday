@@ -27,16 +27,36 @@ def other_generator():
 
 def main_generator():
     some_value = yield from generator()
+
+    # yield from generator() is the same as
+    # gen = generator()
+    # try:
+    #     while True:
+    #         x = next(gen)
+    #         yield x
+    # except StopIteration as e:
+    #     some_value = e.value
+
     other_value = yield from other_generator()
-    # do something with some_value and other_value
+
+    # yield from other_generator() is the same as
+    # gen = other_generator()
+    # try:
+    #     while True:
+    #         x = next(gen)
+    #         yield x
+    # except StopIteration as e:
+    #     some_value = e.value
+
+    return (some_value, other_value)
 
 gen = main_generator()
 
 while True:
     try:
         next(gen)
-    except StopIteration:
-        break
+    except StopIteration as e:
+        return e.value
 ```
 
 ```{admonition} Summary

@@ -2,7 +2,7 @@
 
 The [last step](step9) introduced a new `Task` class that runs a loop over a provided
 coroutine. But wait isn't there an existing loop already? Yes indeed. Our
-`Loop` class. Why not extend the `Loop` class to run this loop.
+`Loop` class. Why not extend the `Loop` class to run this loop too.
 
 
 ````{tab} Source
@@ -18,7 +18,7 @@ coroutine. But wait isn't there an existing loop already? Yes indeed. Our
 ```
 ````
 
-The `Loop` class is extended to allow scheduling `Task`s for the next tick/step.
+The `Loop` class is extended to allow scheduling `Task`s for the next step/tick.
 All scheduled `Task`s are run in the next tick/step.
 
 ````{tab} Source
@@ -35,8 +35,8 @@ All scheduled `Task`s are run in the next tick/step.
 ```
 ````
 
-The `Task` is refactored to not run loop a loop by itself. Instead it schedules
-it's execution via the `Loop`.
+The `Task` is refactored to not run a loop by itself. Instead it schedules its
+execution via the `Loop`.
 
 Let's take a look at our simple example:
 

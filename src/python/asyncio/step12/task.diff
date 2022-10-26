@@ -1,0 +1,35 @@
+--- task3.py	2022-10-25 11:59:53.731574546 +0200
++++ task4.py	2022-10-25 12:09:00.515881169 +0200
+@@ -4,7 +4,7 @@
+ 
+ 
+ class Task(Future):
+-    """Task v3"""
++    """Task v4"""
+ 
+     def __init__(self, coroutine, name=None):
+         super().__init__(name)
+@@ -14,12 +14,21 @@
+ 
+     def step(self):
+         try:
+-            next(self._coroutine)
++            yielded = next(self._coroutine)
+         except StopIteration as e:
+             self.set_result(e.value)
+         else:
+             # no result yet
+-            self.schedule()
++            if isinstance(yielded, Future):
++                # we are blocked by some external event for example waiting for
++                # incoming data. let's wait until result is available
++                yielded.add_done_callback(self._wakeup)
++            else:
++                # just schedule again
++                self.schedule()
+ 
+     def schedule(self):
+         self._loop.schedule(self._name, self.step)
++
++    def _wakeup(self, _future):
++        self.schedule()

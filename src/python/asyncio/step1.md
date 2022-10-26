@@ -40,7 +40,7 @@ sequenceDiagram
 ```
 
 All function calls are run in a sequence. The caller must wait until the
-function is finished to execute its next code for example another function call.
+function is finished to execute its next code, for example another function call.
 
 Besides let us take a look at `Generators`/`Iterators`.
 
@@ -105,7 +105,7 @@ sequenceDiagram
   deactivate c
 ```
 
-A `Generator` can yield values to his called during its execution. The caller
+A `Generator` can yield values to the caller during its execution. The caller
 can request the next value from the `Generator` and do other things in between
 for example calling a function.
 
@@ -116,7 +116,7 @@ for example calling a function.
   another function.
 * The caller can resume the `Generator`.
 * The caller doesn't need to be interested in the **yielded** values.
-* A `Generator` can return a *final* value just like a function.
+* A `Generator` can return a *final* value just like a normal function.
 * A `Generator` is a coroutine.
 ```
 

@@ -6,7 +6,7 @@ from loop import Loop
 class Task(Future):
     """Task v3"""
 
-    def __init__(self, coroutine, name=None):
+    def __init__(self, coroutine, name):
         super().__init__(name)
         self._coroutine = coroutine
         self._loop = Loop.get_current_loop()

@@ -1,0 +1,33 @@
+--- task1.py	2022-10-25 16:38:13.314969582 +0200
++++ task2.py	2022-10-25 11:58:30.783507542 +0200
+@@ -1,20 +1,25 @@
+ from future import Future
+ 
++from loop import Loop
++
+ 
+ class Task(Future):
+-    """Task v1"""
++    """Task v2"""
+ 
+     def __init__(self, coroutine, name):
+         super().__init__(name)
+         self._coroutine = coroutine
+-        self.run_loop()
++        self._loop = Loop.get_current_loop()
++        self.schedule()
+ 
+     def step(self):
+         try:
+             next(self._coroutine)
+         except StopIteration as e:
+             self.set_result(e.value)
++        else:
++            # no result yet
++            self.schedule()
+ 
+-    def run_loop(self):
+-        while not self.done():
+-            self.step()
++    def schedule(self):
++        self._loop.schedule(self)

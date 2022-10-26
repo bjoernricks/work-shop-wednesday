@@ -1,0 +1,15 @@
+--- step10_1.py	2022-10-26 09:41:52.478641884 +0200
++++ step10_2.py	2022-10-26 08:52:23.880895959 +0200
+@@ -11,8 +11,10 @@
+ 
+ 
+ def add(coroutine1, coroutine2):
+-    x = yield from Task(coroutine1, "Add X")
+-    y = yield from Task(coroutine2, "Add Y")
++    task1 = Task(coroutine1, "Add X")
++    task2 = Task(coroutine2, "Add Y")
++    x = yield from task1
++    y = yield from task2
+     return x + y
+ 
+ 

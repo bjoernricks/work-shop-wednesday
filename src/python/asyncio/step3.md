@@ -40,9 +40,9 @@ while True:
 ```
 
 ```{admonition} Summary
-* Using `yield from` allows to write call flow sequences as it would just
+* Using `yield from` allows to write call flow sequences as they would just
   contain normal function calls.
 * Using a single main generator allows for simplifying the business logic
   without having to care about the `Generator` boilerplate
-  (next iteration/catching StopIteration).
+  (next iteration, catching `StopIteration`).
 ```

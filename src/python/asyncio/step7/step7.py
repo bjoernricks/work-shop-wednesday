@@ -6,6 +6,7 @@ from loop import loop
 def some_result(value):
     # just a coroutine to return some value
     future = Future()
+    # do something, we just fake it here
     future.set_result(value)
     return (yield from future)
 

@@ -32,10 +32,11 @@ def loop(gen):
         except StopIteration as e:
             return e.value
 
-loop(main_generator())
+result = loop(main_generator())
+print("Loop finished with result", result)
 ```
 
 ```{admonition} Summary
-* Running the coroutines is done in loop
-* Looping over and therefore running the coroutines is generic
+* Running the coroutines is done in loop.
+* Looping over and therefore running coroutines is generic.
 ```

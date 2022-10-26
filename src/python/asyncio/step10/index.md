@@ -18,6 +18,9 @@ coroutine. But wait isn't there an existing loop already? Yes indeed. Our
 ```
 ````
 
+The `Loop` class is extended to allow scheduling `Task`s for the next tick/step.
+All scheduled `Task`s are run in the next tick/step.
+
 ````{tab} Source
 :new-set:
 ```{literalinclude} task.py
@@ -32,6 +35,11 @@ coroutine. But wait isn't there an existing loop already? Yes indeed. Our
 ```
 ````
 
+The `Task` is refactored to not run loop a loop by itself. Instead it schedules
+it's execution via the `Loop`.
+
+Let's take a look at our simple example:
+
 ```{literalinclude} step10_1.py
 :language: python
 ```
@@ -45,9 +53,19 @@ Loop step 3 [<Task name='Add Y' id='0x7f44a8c33b80'>]
 Loop finished with result 3
 ```
 
+Both tasks are still run sequentially. Let's change that.
+
+````{tab} Source
+:new-set:
 ```{literalinclude} step10_2.py
 :language: python
 ```
+````
+````{tab} Diff
+```{literalinclude} step10.diff
+:language: diff
+```
+````
 
 Output:
 
@@ -59,7 +77,7 @@ Loop finished with result 3
 ```
 
 ```{admonition} Summary
-* The loop schedules tasks now
-* The Task itself has no loop anymore to run the coroutine
-* Tasks are run immediately and concurrently
+* The `Loop` schedules tasks now.
+* The `Task` itself has no loop anymore to run the coroutine.
+* `Task`s can be run immediately and concurrently.
 ```

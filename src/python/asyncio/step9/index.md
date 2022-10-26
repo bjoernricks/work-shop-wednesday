@@ -37,7 +37,9 @@ To change that we need a new thing.
 3. It should run until a job is finally done.
 4. And its result should be gathered in the future.
 
-So lets call this new thing a `Task` but first let's extend our `Future` a bit.
+Because a result should be gathered in the future, let's derive the new thing
+from `Future`. A job can be worked on in a task. So let's call this new thing
+`Task`. But first let's extend our `Future` a bit.
 
 
 ````{tab} Source
@@ -57,7 +59,7 @@ The `Future` class got a done method to check if the result has been set and
 also a result method to allow accessing the result from the outside of the
 class. Now it is possible to check wether the state of the `Future` is done.
 Additionally it is possible to pass a name to identify the `Future` via
- `__repr__` more easily in later steps for debug purposes.
+ `__repr__` more easily in later steps for debugging purposes.
 
 ```{literalinclude} task.py
 :language: python
@@ -77,12 +79,13 @@ Loop step 3
 Loop finished with result 3
 ```
 
-First of all the functionality and result hasn't changed. We just introduced a
-new class that wraps our coroutines.
+First of all the functionality and the result hasn't changed. We just introduced
+a new class that wraps our coroutines.
 
 
 ```{admonition} Summary
-* We have a basic `Task` class that runs a coroutine in a loop and returns the
- result of the coroutine in the future when it's done.
+* We have a basic `Task` class that runs a coroutine in a loop.
+* The coroutine is started immediately.
+* The `Task` returns the result of the coroutine in the future when it's done.
 ```
 

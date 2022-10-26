@@ -11,8 +11,10 @@ def some_result(result):
 
 
 def add(coroutine1, coroutine2):
-    x = yield from Task(coroutine1, "Add X")
-    y = yield from Task(coroutine2, "Add Y")
+    task1 = Task(coroutine1, "Add X")
+    task2 = Task(coroutine2, "Add Y")
+    x = yield from task1
+    y = yield from task2
     return x + y
 
 

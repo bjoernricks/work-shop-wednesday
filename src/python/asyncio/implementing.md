@@ -16,6 +16,14 @@ scratch.
 `Generators`/`Iterators` are coroutines. `Generators` allow suspend the current
 function and to return to the caller of the function.
 
+### Overview
+
+We are going to re-implement the `asyncio` Python standard library step-by-step
+as it was provided with Python 3.4 initially. This allows for understanding
+it's internals and general concept. Of course we are using simplifications and
+skipping some parts like cancellation. These parts are mentioned in the
+[What's missing](missing.md) chapter.
+
 ```{toctree}
 step1
 step2
@@ -34,43 +42,3 @@ step14/index
 missing
 stepz
 ```
-
-#### Step Z - The coroutine/generator Issue
-
-* We have (mis-)used the generators
-* Generators/Iterators are intended for yielding something that is consumed by
-  the caller.
-* Coroutines use `yield` and `yield from` to just suspend the current function
-  and give control back to the loop.
-* Implementation wise we have the same thing, but semantically they are very
-  different.
-* Users could still pass generators and generators could still run coroutines.
-* From looking at the code or the object users still could mix up coroutines and
-  generators because it relies just on a technical detail.
-* Nothing forbids to use coroutines as generators and the other way round.
-
-A `generator function` could be marked as a `coroutine function`.
-
-```python
-import inspect
-
-def mark_as_coroutine(func):
-    if not inspect.isgeneratorfunction(func):
-        raise TypeError(f"{func.__name__} is not a generator function")
-    func._is_coroutine = True
-    return func
-
-def is_coroutine_function(func):
-    return getattr(func, "_is_coroutine", False)
-
-@mark_as_coroutine
-def some_result():
-    future = Future()
-    future.set_result(result)
-    return (yield from future)
-
-
-is_coroutine_function(some_result)
-```
-
-Async/Await to the rescue

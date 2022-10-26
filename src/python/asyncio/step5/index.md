@@ -1,6 +1,6 @@
 ### Step 5 - A runnable Example
 
-Lets take a look at our current concept at a runnable example.
+Lets take a look at our current concept by using a runnable example.
 
 
 ```{literalinclude} loop.py
@@ -15,7 +15,6 @@ Lets take a look at our current concept at a runnable example.
 Output:
 
 ```python
->>> loop(main_generator())
 Loop step 1
 main_generator 1
 chaining_generator 1
@@ -30,7 +29,7 @@ Loop step 4
 generator_two 3
 chaining_generator 3
 main_generator 2
-Loop finished
+Loop finished with result None
 ```
 
 As a sequence diagram:

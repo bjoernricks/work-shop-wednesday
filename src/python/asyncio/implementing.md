@@ -25,10 +25,10 @@ skipping some parts like cancellation. These parts are mentioned in the
 [What's missing](missing.md) chapter.
 
 ```{toctree}
-step1
-step2
-step3
-step4
+step1/index
+step2/index
+step3/index
+step4/index
 step5/index
 step6/index
 step7/index

@@ -66,7 +66,7 @@ sequenceDiagram
   deactivate g1
 
   activate l
-  l-->>g1: next
+  l->>g1: next
   deactivate l
 
   activate g1
@@ -86,7 +86,7 @@ sequenceDiagram
   deactivate g2
 
   activate l
-  l-->>g2: next
+  l->>g2: next
   deactivate l
 
   activate g2
@@ -94,7 +94,7 @@ sequenceDiagram
   deactivate g2
 
   activate l
-  l-->>g2: next
+  l->>g2: next
   deactivate l
 
   activate g2

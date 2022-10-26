@@ -76,8 +76,7 @@ class Loop:
         self._running = False
 
     def schedule(self, name, callback, *args):
-        handle = Handle(name, callback, args)
-        self._scheduled.append(handle)
+        self._scheduled.append(Handle(name, callback, args))
 
     def _done(self, _future):
         self.stop()

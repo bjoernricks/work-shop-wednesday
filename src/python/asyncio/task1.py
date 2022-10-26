@@ -4,7 +4,7 @@ from future import Future
 class Task(Future):
     """Task v1"""
 
-    def __init__(self, coroutine, name=None):
+    def __init__(self, coroutine, name):
         super().__init__(name)
         self._coroutine = coroutine
         self.run_loop()

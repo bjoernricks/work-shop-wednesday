@@ -1,7 +1,5 @@
 class Future:
-    """
-    Return a result in the future v1
-    """
+    """Return a result in the future v1"""
 
     _result = None
 

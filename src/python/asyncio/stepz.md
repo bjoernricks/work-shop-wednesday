@@ -14,10 +14,12 @@ There are some issues in the concept:
 * Users could still pass generators and generators could still run coroutines
   because nothing forbids to use coroutines as generators and the other way
   round.
+* Using `yield`/`yield from` somewhere in a function declaration to make the
+  function asynchronous is not very obvious.
 * Users could refactor a generator function that it becomes a normal function
   (accidentally) just because `yield`/`yield from` is removed.
 * As mentioned nothings forbids to pass a normal function as a coroutine. But it
-  just breaks the concept completely.
+  breaks the concept completely.
 
 
 At least changing a coroutine to a normal function can be avoided by marking

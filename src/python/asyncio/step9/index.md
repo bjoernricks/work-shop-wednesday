@@ -1,4 +1,6 @@
-### Step 9 - A job has to be done
+(step9)=
+
+### Step 9 - A Job has to be done
 
 Let us look at the example from the last step again with some more output.
 
@@ -31,16 +33,25 @@ current function but we still run all coroutines sequentially.
 To change that we need a new thing.
 1. This thing should take a coroutine, because all our business logic uses
    coroutines.
-2. It should run the coroutine immediately, because we want to get a job done
-3. It should run until a job is finally done
+2. It should run the coroutine immediately, because we want to get a job done.
+3. It should run until a job is finally done.
 4. And its result should be gathered in the future.
 
 So lets call this new thing a `Task` but first let's extend our `Future` a bit.
 
+
+````{tab} Source
 ```{literalinclude} future.py
 :language: python
 :caption: Future v2
 ```
+````
+````{tab} Diff
+```{literalinclude} future.diff
+:language: diff
+:caption: Future v2
+```
+````
 
 The `Future` class got a done method to check if the result has been set and
 also a result method to allow accessing the result from the outside of the
@@ -57,12 +68,21 @@ Additionally it is possible to pass a name to identify the `Future` via
 :language: python
 ```
 
+Output:
+
+```
+Loop step 1
+Loop step 2
+Loop step 3
+Loop finished with result 3
+```
+
 First of all the functionality and result hasn't changed. We just introduced a
 new class that wraps our coroutines.
 
 
 ```{admonition} Summary
-* We have a basic `Task` class that runs a coroutine and returns the result of
-  the coroutine in the future.
+* We have a basic `Task` class that runs a coroutine in a loop and returns the
+ result of the coroutine in the future when it's done.
 ```
 

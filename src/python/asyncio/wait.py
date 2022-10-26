@@ -2,6 +2,7 @@ from future import Future
 
 
 def wait(*tasks):
+    """Wait for Tasks to finish and gather their results as a list"""
     waiter = Future(f"Waiter for {', '.join([str(t) for t in tasks])}")
     counter = len(tasks)
 

@@ -88,11 +88,11 @@ class Loop:
 
 def load_data(host):
     connection = loop.create_connection(host)
-    return (yield from connection.read())
+    return (yield from connection)
 
 
 def add(coroutine1, coroutine2):
-    x, y = yield from wait(Task(coroutine1, "Add X"), Task(coroutine2, "Add Y"))
+    x, y = yield from wait([coroutine1, coroutine2])
     return x + y
 
 

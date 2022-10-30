@@ -1,5 +1,9 @@
 ### Step 12 - Back to the Future
 
+Currently a `Task` is `done` in exactly two steps/ticks of the `Loop`. What if
+we need to wait for more then one step/tick for some external *event* providing
+a result?
+
 ````{tab} Source
 ```{literalinclude} future.py
 :language: python
@@ -34,6 +38,8 @@ the `Future` is done the callbacks are scheduled for the next step/tick in our
 
 The `Loop` doesn't know anything about the `Generator`/`Iterator` protocol
 anymore. It just starts a coroutine in a `Tasks` and schedules `Handle`s.
+Instead the `Task`s are resuming the coroutines via the `Generator`/`Iterator`
+protocol.
 
 ````{tab} Source
 :new-set:
@@ -76,6 +82,8 @@ Loop finished with result 3
 ```
 
 ```{admonition} Summary
-* `Task` can wait for results that are currently *blocked*.
-* A `Future` *blocks* until it is done.
+* A `Task` can wait for results that are currently *blocked*.
+* If a `Task` gets a `Future` from a coroutine it *blocks* until the `Future` is
+  done.
+* *Blocked* means the `Task` is suspended and the result is not available yet.
 ```

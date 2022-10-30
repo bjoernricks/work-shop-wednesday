@@ -1,5 +1,4 @@
 from future import Future
-from task import Task
 from wait import wait
 
 from loop import Loop
@@ -12,7 +11,7 @@ def some_result(result):
 
 
 def add(coroutine1, coroutine2):
-    x, y = yield from wait(Task(coroutine1, "Add X"), Task(coroutine2, "Add Y"))
+    x, y = yield from wait([coroutine1, coroutine2])
     return x + y
 
 

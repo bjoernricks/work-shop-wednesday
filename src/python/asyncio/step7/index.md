@@ -32,6 +32,7 @@ Example:
 
 ```python
 def future_result(future):
+    # something might happen here too
     return (yield from future)
 
 future = Future()

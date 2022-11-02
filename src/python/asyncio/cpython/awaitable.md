@@ -1,9 +1,21 @@
 ### Awaitable Protocol
 
 > An object that can be used in an await expression. Can be a coroutine or an
-> object with an __await__() method
+> object with an `__await__()` method
 
 [Source](https://docs.python.org/3/glossary.html#term-awaitable)
+
+```python
+from typing import Any, Iterator
+
+
+class Awaitable:
+
+    def __await__(self) -> Iterator[Any]:
+        """
+        Returns an Iterator
+        """
+```
 
 > We say an object is an awaitable object if it can be used in an `await`
 > expression. Many asyncio APIs are designed to accept awaitables.
@@ -18,12 +30,7 @@
 
 [Source](https://docs.python.org/3.10/library/asyncio-task.html#awaitables)
 
-```python
-class Awaitable:
+Old coroutines are now often called *generator based coroutines* and new ones
+are called *native coroutines* to differentiate them.
 
-    def __await__(self):
-        """
-        Returns an Iterator
-        """
-```
 

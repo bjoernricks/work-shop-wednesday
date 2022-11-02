@@ -1,0 +1,86 @@
+--- loop5.py	2022-11-02 15:31:25.547688722 +0100
++++ step15/loop.py	2022-11-02 16:21:46.390948993 +0100
+@@ -1,16 +1,31 @@
+ from typing import Any, Callable, Generator
+ 
++from future import Future
+ from handle import Handle
+ 
++# this is just an non runable example how it could possibly work
++#
++# the real implementation is more complex and depends on the operating system,
++# chosen loop implementation, socket type, selector implementation, ...
++
++
++def create_socket(host) -> Socket:
++    # just create a socket connection to a host
++    sock = socket.socket()
++    sock.setblocking(False)
++    sock.connect(host)
++    return sock  # a socket
++
+ 
+ class Loop:
+-    """Loop v5"""
++    """Loop v6"""
+ 
+     _instance: "Loop" = None
+ 
+     def __init__(self):
+         self._running = False
+         self._scheduled = []
++        self._selector = Selector()  # Some Selector class
+ 
+     @classmethod
+     def get_current_loop(cls) -> "Loop":
+@@ -18,26 +33,32 @@
+             cls._instance = Loop()
+         return cls._instance
+ 
++    def create_connection(self, host: str):
++        waiter = Future()
++        socket = create_socket(host)
++        self._selector.add(socket, Handle(self._receive_data, waiter, socket))
++        return waiter
++
++    def _receive_data(future: Future, socket: Socket):
++        data = socket.recv()
++        future.set_result(data)
++
+     def run_step(self) -> None:
+         """Run a single step/tick of the loop"""
+-        # execute all current known handles only.
+-        # not the ones added while running the handle callbacks
+-        scheduled = self._scheduled.copy()
+-        self._scheduled.clear()
+-
+-        try:
+-            handle = scheduled.pop(0)  # fifo: extract first item
+-            while handle is not None:
+-                handle.run()
+-                handle = scheduled.pop(0)  # fifo: extract first item
+-        except IndexError:
+-            # list is empty
+-            pass
+-        # a shorter and even more smarter version for the above code could be
+-        #
+-        # for _ in range(len(self._scheduled)):
+-        #     handle = self._scheduled.pop(0)  # fifo: extract first item
+-        #     handle.run()
++        if not self._scheduled:
++            timeout = None  # wait forever until data is available
++        else:
++            timeout = 0  # just get the sockets with data
++
++        # wait and block for data depending on the timeout
++        # returns an iterable of handles which corresponding sockets have data
++        handles = self._selector.select(timeout)
++        if handles:
++            self._scheduled.extend(handles)
++
++        for _ in range(len(self._scheduled)):
++            handle = self._scheduled.pop(0)  # fifo: extract first item
++            handle.run()
+ 
+     def run_loop(self) -> None:
+         """Run the loop"""

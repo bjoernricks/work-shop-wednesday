@@ -1,17 +1,17 @@
---- task2.py	2022-10-26 09:41:50.994642454 +0200
-+++ task3.py	2022-10-26 12:20:07.993060512 +0200
-@@ -4,7 +4,7 @@
+--- task2.py	2022-11-02 10:08:05.706252365 +0100
++++ task3.py	2022-11-02 10:10:30.317376323 +0100
+@@ -6,7 +6,7 @@
  
  
  class Task(Future):
 -    """Task v2"""
 +    """Task v3"""
  
-     def __init__(self, coroutine, name):
+     def __init__(self, coroutine: Generator[Any, None, Any], name: str):
          super().__init__(name)
-@@ -22,4 +22,4 @@
+@@ -24,4 +24,4 @@
              self.schedule()
  
-     def schedule(self):
+     def schedule(self) -> None:
 -        self._loop.schedule(self)
 +        self._loop.schedule(self._name, self.step)

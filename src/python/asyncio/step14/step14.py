@@ -1,3 +1,5 @@
+from typing import Any, Callable, Generator
+
 from future import Future
 from handle import Handle
 from task import Task
@@ -9,7 +11,7 @@ from wait import wait
 # chosen loop implementation, socket type, selector implementation, ...
 
 
-def create_socket(host):
+def create_socket(host) -> Socket:
     # just create a socket connection to a host
     sock = socket.socket()
     sock.setblocking(False)
@@ -18,9 +20,9 @@ def create_socket(host):
 
 
 class Loop:
-    """Loop v5"""
+    """Loop v6"""
 
-    _instance = None
+    _instance: "Loop" = None
 
     def __init__(self):
         self._running = False
@@ -28,12 +30,12 @@ class Loop:
         self._selector = Selector()  # Some Selector class
 
     @classmethod
-    def get_current_loop(cls):
+    def get_current_loop(cls) -> "Loop":
         if not cls._instance:
             cls._instance = Loop()
         return cls._instance
 
-    def run_step(self):
+    def run_step(self) -> None:
         if not self._scheduled:
             timeout = None  # wait forever
         else:
@@ -49,13 +51,13 @@ class Loop:
             handle = self._scheduled.pop(0)  # fifo: extract first item
             handle.run()
 
-    def create_connection(self, host):
+    def create_connection(self, host: str):
         waiter = Future()
         socket = create_socket(host)
         self._selector.add(socket, Handle(self._receive_data, waiter, socket))
         return waiter
 
-    def _receive_data(future, socket):
+    def _receive_data(future: Future, socket: Socket):
         data = socket.recv()
         future.set_result(data)
 
@@ -67,7 +69,7 @@ class Loop:
             self.run_step()
             step += 1
 
-    def run(self, coroutine):
+    def run(self, coroutine: Generator[Any, None, Any]) -> Any:
         # run until complete/done
         from task import Task  # avoid cyclic dependency
 
@@ -76,13 +78,13 @@ class Loop:
         self.run_loop()
         return task.result()
 
-    def stop(self):
+    def stop(self) -> None:
         self._running = False
 
-    def schedule(self, name, callback, *args):
+    def schedule(self, name: str, callback: Callable, *args: Any):
         self._scheduled.append(Handle(name, callback, args))
 
-    def _done(self, _future):
+    def _done(self, _future: Future):
         self.stop()
 
 

@@ -1,17 +1,17 @@
---- loop4.py	2022-10-25 15:18:22.941289774 +0200
-+++ loop5.py	2022-10-25 15:20:24.157262804 +0200
-@@ -2,7 +2,7 @@
+--- loop4.py	2022-11-02 10:35:15.054206925 +0100
++++ loop5.py	2022-11-02 10:40:49.104560788 +0100
+@@ -4,7 +4,7 @@
  
  
  class Loop:
 -    """Loop v4"""
 +    """Loop v5"""
  
-     _instance = None
+     _instance: "Loop" = None
  
-@@ -18,28 +18,43 @@
+@@ -20,28 +20,43 @@
  
-     def run_step(self):
+     def run_step(self) -> None:
          """Run a single step/tick of the loop"""
 +        # execute all current known handles only.
 +        # not the ones added while running the handle callbacks
@@ -29,7 +29,7 @@
              # list is empty
              pass
  
--    def run(self, coroutine):
+-    def run(self, coroutine: Generator[Any, None, Any]) -> Any:
 -        """Run a coroutine"""
 +        # a shorter and even more smarter version
 +        #
@@ -37,7 +37,7 @@
 +        #     handle = self._scheduled.pop(0)  # fifo: extract first item
 +        #     handle.run()
 +
-+    def run_loop(self):
++    def run_loop(self) -> None:
 +        """Run the loop"""
          self._running = True
          step = 1
@@ -53,7 +53,7 @@
 +            self.run_step()
 +            step += 1
 +
-+    def run(self, coroutine):
++    def run(self, coroutine: Generator[Any, None, Any]) -> Any:
 +        """Run a coroutine until it is done/completed"""
 +        from task import Task  # avoid cyclic dependency
 +
@@ -62,12 +62,12 @@
 +        self.run_loop()
 +        return task.result()
  
-     def stop(self):
+     def stop(self) -> None:
          """Stop running the loop"""
-@@ -48,3 +63,6 @@
-     def schedule(self, name, callback, *args):
+@@ -50,3 +65,6 @@
+     def schedule(self, name: str, callback: Callable, *args: Any) -> None:
          """Schedule a callback for the next step/tick"""
          self._scheduled.append(Handle(name, callback, args))
 +
-+    def _done(self, _future):
++    def _done(self, _future) -> None:
 +        self.stop()

@@ -1,17 +1,20 @@
---- loop3.py	2022-10-25 15:18:31.777287961 +0200
-+++ loop4.py	2022-10-25 15:18:22.941289774 +0200
-@@ -1,5 +1,8 @@
+--- loop3.py	2022-11-02 10:33:10.882781008 +0100
++++ loop4.py	2022-11-02 10:35:15.054206925 +0100
+@@ -1,8 +1,10 @@
+-from typing import Any, Generator
++from typing import Any, Callable, Generator
++
 +from handle import Handle
-+
-+
+ 
+ 
  class Loop:
 -    """Loop v3"""
 +    """Loop v4"""
  
-     _instance = None
+     _instance: "Loop" = None
  
-@@ -16,10 +19,10 @@
-     def run_step(self):
+@@ -19,10 +21,10 @@
+     def run_step(self) -> None:
          """Run a single step/tick of the loop"""
          try:
 -            task = self._scheduled.pop(0)  # fifo: extract first item
@@ -25,13 +28,13 @@
          except IndexError:
              # list is empty
              pass
-@@ -42,6 +45,6 @@
+@@ -45,6 +47,6 @@
          """Stop running the loop"""
          self._running = False
  
--    def schedule(self, task):
+-    def schedule(self, task) -> None:
 -        """Schedule a Task for the next step/tick"""
 -        self._scheduled.append(task)
-+    def schedule(self, name, callback, *args):
++    def schedule(self, name: str, callback: Callable, *args: Any) -> None:
 +        """Schedule a callback for the next step/tick"""
 +        self._scheduled.append(Handle(name, callback, args))

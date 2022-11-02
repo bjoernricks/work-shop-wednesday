@@ -1,22 +1,24 @@
+from typing import Any, Callable, Generator
+
 from handle import Handle
 
 
 class Loop:
     """Loop v5"""
 
-    _instance = None
+    _instance: "Loop" = None
 
     def __init__(self):
         self._running = False
         self._scheduled = []
 
     @classmethod
-    def get_current_loop(cls):
+    def get_current_loop(cls) -> "Loop":
         if not cls._instance:
             cls._instance = Loop()
         return cls._instance
 
-    def run_step(self):
+    def run_step(self) -> None:
         """Run a single step/tick of the loop"""
         # execute all current known handles only.
         # not the ones added while running the handle callbacks
@@ -38,7 +40,7 @@ class Loop:
         #     handle = self._scheduled.pop(0)  # fifo: extract first item
         #     handle.run()
 
-    def run_loop(self):
+    def run_loop(self) -> None:
         """Run the loop"""
         self._running = True
         step = 1
@@ -47,7 +49,7 @@ class Loop:
             self.run_step()
             step += 1
 
-    def run(self, coroutine):
+    def run(self, coroutine: Generator[Any, None, Any]) -> Any:
         """Run a coroutine until it is done/completed"""
         from task import Task  # avoid cyclic dependency
 
@@ -56,13 +58,13 @@ class Loop:
         self.run_loop()
         return task.result()
 
-    def stop(self):
+    def stop(self) -> None:
         """Stop running the loop"""
         self._running = False
 
-    def schedule(self, name, callback, *args):
+    def schedule(self, name: str, callback: Callable, *args: Any) -> None:
         """Schedule a callback for the next step/tick"""
         self._scheduled.append(Handle(name, callback, args))
 
-    def _done(self, _future):
+    def _done(self, _future) -> None:
         self.stop()

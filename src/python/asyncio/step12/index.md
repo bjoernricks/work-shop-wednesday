@@ -26,13 +26,13 @@ the `Future` is done the callbacks are scheduled for the next step/tick in our
 :new-set:
 ```{literalinclude} loop.py
 :language: python
-:caption: Loop v4
+:caption: Loop v5
 ```
 ````
 ````{tab} Diff
 ```{literalinclude} loop.diff
 :language: diff
-:caption: Loop v4
+:caption: Loop v5
 ```
 ````
 

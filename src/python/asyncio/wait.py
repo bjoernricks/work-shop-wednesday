@@ -1,8 +1,10 @@
 from asyncio import iscoroutine
-from typing import Any, Coroutine, Iterable, List, Union
+from typing import Any, Generator, Iterable, List, Union
 
 from future import Future
 from task import Task
+
+Coroutine = Generator[Any, None, Any]
 
 
 def ensure_future(coro_or_future: Union[Coroutine, Future]) -> Future:
@@ -17,7 +19,7 @@ def ensure_future(coro_or_future: Union[Coroutine, Future]) -> Future:
     elif iscoroutine(coro_or_future):
         return Task(coro_or_future, f"Task for {coro_or_future.__name__}")
     else:
-        raise TypeError("A Future, a coroutine or an awaitable is required")
+        raise TypeError("A Future or a coroutine is required")
 
 
 def wait(coros_or_futures: Iterable[Union[Coroutine, Future]]) -> List[Any]:

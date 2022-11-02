@@ -1,23 +1,25 @@
---- loop2.py	2022-10-25 15:16:27.545311021 +0200
-+++ loop3.py	2022-10-25 15:18:31.777287961 +0200
-@@ -1,10 +1,11 @@
+--- loop2.py	2022-11-02 10:06:59.866639812 +0100
++++ loop3.py	2022-11-02 10:33:10.882781008 +0100
+@@ -2,12 +2,13 @@
+ 
+ 
  class Loop:
 -    """Loop v2"""
 +    """Loop v3"""
  
-     _instance = None
+     _instance: "Loop" = None
  
      def __init__(self):
          self._running = False
 +        self._scheduled = []
  
      @classmethod
-     def get_current_loop(cls):
-@@ -12,13 +13,25 @@
+     def get_current_loop(cls) -> "Loop":
+@@ -15,13 +16,25 @@
              cls._instance = Loop()
          return cls._instance
  
-+    def run_step(self):
++    def run_step(self) -> None:
 +        """Run a single step/tick of the loop"""
 +        try:
 +            task = self._scheduled.pop(0)  # fifo: extract first item
@@ -28,7 +30,7 @@
 +            # list is empty
 +            pass
 +
-     def run(self, coroutine):
+     def run(self, coroutine: Generator[Any, None, Any]) -> Any:
          """Run a coroutine"""
          self._running = True
          step = 1
@@ -40,11 +42,11 @@
                  next(coroutine)
                  step += 1
              except StopIteration as e:
-@@ -28,3 +41,7 @@
-     def stop(self):
+@@ -31,3 +44,7 @@
+     def stop(self) -> None:
          """Stop running the loop"""
          self._running = False
 +
-+    def schedule(self, task):
++    def schedule(self, task) -> None:
 +        """Schedule a Task for the next step/tick"""
 +        self._scheduled.append(task)

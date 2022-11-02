@@ -1,8 +1,37 @@
 ### Step 12 - Back to the Future
 
-Currently a `Task` is `done` in exactly two steps/ticks of the `Loop`. What if
-we need to wait for more then one step/tick for some external *event* providing
-a result?
+Currently a `Future` is `done` in exactly two steps/ticks of the `Loop`.
+
+
+```python
+from future import Future
+
+future = Future()
+it = iter(future)
+# step 1
+next(it)
+# step 2
+# still no result yet
+next(it)
+```
+
+A `StopIteration` exception is raised without a value set at the second step.
+
+````{hint}
+Remember `yield from future` is the same as
+```python
+it = iter(future)
+while True:
+  try:
+    value = next(it)
+    yield value
+  except StopIteration as e:
+    return e.value
+```
+````
+
+What if we need to wait for more then one step/tick for example to wait for some
+external *event* providing the result?
 
 ````{tab} Source
 ```{literalinclude} future.py
@@ -24,25 +53,6 @@ the `Future` is done the callbacks are scheduled for the next step/tick in our
 
 ````{tab} Source
 :new-set:
-```{literalinclude} loop.py
-:language: python
-:caption: Loop v5
-```
-````
-````{tab} Diff
-```{literalinclude} loop.diff
-:language: diff
-:caption: Loop v5
-```
-````
-
-The `Loop` doesn't know anything about the `Generator`/`Iterator` protocol
-anymore. It just starts a coroutine in a `Tasks` and schedules `Handle`s.
-Instead the `Task`s are resuming the coroutines via the `Generator`/`Iterator`
-protocol.
-
-````{tab} Source
-:new-set:
 ```{literalinclude} task.py
 :language: python
 :caption: Task v4
@@ -55,12 +65,13 @@ protocol.
 ```
 ````
 
-The `Task` is extended to run a coroutine that is actually being blocked by some
-external *event*. This is indicated by yielding a `Future`. If a `Future` is
-yielded the `Tasks` registers a wake up callback at the `Future`. If the
-`Future` is done the `Task` is scheduled again via the `Loop`. This allows for
-the Task to *sleep* for one or more scheduler ticks/steps until some *event* has
-occurred.
+The `Task` is extended to run a coroutine that is actually being *blocked* by
+some external *event*. The coroutine indicates this by yielding a `Future`. If
+a `Future` is yielded the `Tasks` registers a wake up callback at this `Future`.
+The `Task` is suspended now (it isn't scheduled in the loop anymore). If the
+`Future` is done the `Task` is notified and scheduled again via the `Loop`. This
+allows the Task to *sleep* for one or more scheduler ticks/steps until some
+*event* has occurred.
 
 ```{literalinclude} step12.py
 :language: python
@@ -69,15 +80,9 @@ occurred.
 Output:
 
 ```
-Loop step 1 [<Handle name='Initial Task' callback='step'>]
+Loop step 1 []
 Loop step 2 [<Handle name='Add X' callback='step'>, <Handle name='Add Y' callback='step'>]
-Loop step 3 [<Handle name='Some Result' callback='_wakeup'>, <Handle name='Some Result' callback='_wakeup'>]
-Loop step 4 [<Handle name='Add X' callback='step'>, <Handle name='Add Y' callback='step'>]
-Loop step 5 [<Handle name='Add X' callback='_wakeup'>]
-Loop step 6 [<Handle name='Initial Task' callback='step'>]
-Loop step 7 [<Handle name='Add Y' callback='_wakeup'>]
-Loop step 8 [<Handle name='Initial Task' callback='step'>]
-Loop step 9 [<Handle name='Initial Task' callback='_done'>]
+Loop step 3 []
 Loop finished with result 3
 ```
 

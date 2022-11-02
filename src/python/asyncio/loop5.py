@@ -33,8 +33,7 @@ class Loop:
         except IndexError:
             # list is empty
             pass
-
-        # a shorter and even more smarter version
+        # a shorter and even more smarter version for the above code could be
         #
         # for _ in range(len(self._scheduled)):
         #     handle = self._scheduled.pop(0)  # fifo: extract first item
@@ -53,6 +52,8 @@ class Loop:
         """Run a coroutine until it is done/completed"""
         from task import Task  # avoid cyclic dependency
 
+        # create a root task for our coroutine
+        # the tasks gets scheduled immediately in its constructor
         task = Task(coroutine, "Initial Task")
         task.add_done_callback(self._done)
         self.run_loop()

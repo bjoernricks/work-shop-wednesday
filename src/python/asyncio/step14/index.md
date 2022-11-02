@@ -1,28 +1,36 @@
-### Step 14 - And what about real Async IO?
+### Step 14 - Let's wait
 
-Until now why didn't handle real Asynchronous IO like reading and writing from
-and to network sockets. Because this topic heavily depends on the used operating
-system and loop implementation it is handled here only schematically for a Linux
-based system.
+Often it is desireable to start some coroutines concurrently and wait for their
+results. This can be accomplished by wrapping them in Tasks in some `wait`
+function.
+
+```{literalinclude} wait.py
+:language: python
+:caption: wait.py
+```
+
+Using the `wait` function our previous example from [Step 13](../step13/index.md)
+can be re-written as:
 
 ```{literalinclude} step14.py
 :language: python
 ```
 
-The idea is to have a `Selector` API that does `select` calls on sockets
-internally. If no data is available the `select` calls do block the current
-thread (and therefore our loop) until data is available. Otherwise the
-`Selector` API returns the corresponding `Handler` for sockets with available
-data. The `Selector` API is called at every step/tick before the `Handler`s are
-run to schedule the socket `Handler`s for this step.
+Output:
 
-To allow the `Loop` to track all socket communication the creation of the socket
-must originate in the `Loop`. In our case it is done via the `create_connection`
-method. This allows for pairing a `Future` with a socket in a `Handler`.
-
+```
+Loop step 1 [<Handle name='Initial Task' callback='step'>]
+Loop step 2 [<Handle name='Task for some_result' callback='step'>, <Handle name='Task for some_result' callback='step'>]
+Loop step 3 [<Handle name='Some Result' callback='_wakeup'>, <Handle name='Some Result' callback='_wakeup'>]
+Loop step 4 [<Handle name='Task for some_result' callback='step'>, <Handle name='Task for some_result' callback='step'>]
+Loop step 5 [<Handle name='Task for some_result' callback='_on_completion'>, <Handle name='Task for some_result' callback='_on_completion'>]
+Loop step 6 [<Handle name='Waiter for <Task name='Task for some_result' id='0x7fe9759a5e40'>, <Task name='Task for some_result' id='0x7fe9759a5f00'>' callback='_wakeup'>]
+Loop step 7 [<Handle name='Initial Task' callback='step'>]
+Loop step 8 [<Handle name='Initial Task' callback='_done'>]
+Loop finished with result 3
+```
 
 ```{admonition} Summary
-* All I/O must originate in our `Loop`.
-* The `Loop` provides methods for creating network connections.
-* The `Loop` tracks the network connections and notifies waiting `Future`s.
+* Using specific `wait` functions allow ot gather results from concurrent
+  `Task`s more easily.
 ```

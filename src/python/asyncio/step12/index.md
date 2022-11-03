@@ -51,6 +51,9 @@ a result is set. This allows for getting notified when a `Future` is done. When
 the `Future` is done the callbacks are scheduled for the next step/tick in our
 `Loop`.
 
+But the actual waiting for some external *event* providing the result is not
+implemented directly in a `Future`. Instead the `Task` is extended.
+
 ````{tab} Source
 :new-set:
 ```{literalinclude} task.py
@@ -90,5 +93,8 @@ Loop finished with result 3
 * A `Task` can wait for results that are currently *blocked*.
 * If a `Task` gets a `Future` from a coroutine it *blocks* until the `Future` is
   done.
-* *Blocked* means the `Task` is suspended and the result is not available yet.
+* *Blocked* means the `Task` is suspended, it is not scheduled in the `Loop`
+  anymore and the result is not available yet.
+* If the result is available finally the `Task` gets notified and schedules
+  itself for the next step/tick in the `Loop`.
 ```

@@ -23,12 +23,16 @@ Future 1
 Loop step 3
 Future 2
 add 3
-main 1
+main 2
 Loop finished with result 3
 ```
 
-As you can see there is still no real concurrency. Only a single coroutines is
-run until it is finished before another one is called.
+`Future 1` is reached and afterwards the control is given back to the loop. A
+next step is executed. After `Future 2` a result is available.
+
+As you can see there is still no real concurrency. Only a single coroutine is
+run until it is finished and the result is available before another one is
+called in the next step of the loop.
 
 Yes we can suspend the current function but we still run all coroutines
 sequentially.
@@ -83,12 +87,13 @@ Loop finished with result 3
 ```
 
 First of all the functionality and the result hasn't changed. We just introduced
-a new class that wraps our coroutines.
+a new class that wraps our coroutines. We will get to concurrently running
+`Task`s in the next chapter.
 
 
 ```{admonition} Summary
 * We have a basic `Task` class that runs a coroutine in a loop.
-* The coroutine is started immediately.
+* This coroutine is started immediately.
 * The `Task` returns the result of the coroutine in the future when it's done.
 ```
 

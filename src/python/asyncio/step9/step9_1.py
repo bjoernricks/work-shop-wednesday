@@ -35,7 +35,7 @@ def add(coroutine1, coroutine2):
 def main():
     print(main.__name__, 1)
     result = yield from add(some_result(1), some_result(2))
-    print(main.__name__, 1)
+    print(main.__name__, 2)
     return result
 
 

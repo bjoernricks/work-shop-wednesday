@@ -19,7 +19,7 @@ coroutine. But wait isn't there an existing loop already? Yes indeed. Our
 ````
 
 The `Loop` class is extended to allow scheduling `Task`s for the next step/tick.
-All scheduled `Task`s are run in the next tick/step.
+All scheduled `Task`s are run in the next step/tick.
 
 ````{tab} Source
 :new-set:

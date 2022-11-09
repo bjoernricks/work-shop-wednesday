@@ -9,6 +9,8 @@ cpython/async_await
 cpython/async_iterators
 cpython/async_generators
 cpython/async_context_manager
+cpython/examples
+cpython/issues
 cpython/history
 ```
 

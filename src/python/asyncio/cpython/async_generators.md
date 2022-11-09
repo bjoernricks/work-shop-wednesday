@@ -40,6 +40,9 @@ class AsyncGenerator(AsyncIterator):
 
 #### Async Generator Function
 
+What's the purpose of an `AsyncGenerator`. Mostly to implement `async generator
+functions`.
+
 Now it gets a bit complicated:
 
 ```python
@@ -82,4 +85,8 @@ Output:
 
 
 ```{admonition} Summary
+* `AsyncGenerator` allows to write `async generator functions`.
+* An `async generator function` is an async function containing the `yield`
+  statement.
+* `async generator functions` allow to write `AsyncIterators` more easily.
 ```

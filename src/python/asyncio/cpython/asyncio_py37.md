@@ -1,4 +1,4 @@
-#### Async/Await (Python >= 3.7)
+#### AsyncIO - Async/Await (Python >= 3.7)
 
 Major change is [asyncio.run](https://docs.python.org/3.10/library/asyncio-task.html#asyncio.run).
 
@@ -26,3 +26,7 @@ async def print_sum(x, y):
 asyncio.run(print_sum(1, 2))
 ```
 
+```{admonition} Summary
+* No need to know anything about a loop
+* Just *run my async stuff!*
+```

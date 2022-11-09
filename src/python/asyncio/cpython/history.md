@@ -1,4 +1,7 @@
 ### History
+
+An overview about AsyncIO related changes in Python.
+
 #### Python 3.3
 * A pluggable event loop, transport and protocol abstractions, and a higher-level scheduler based on yield from [PEP 3156](https://peps.python.org/pep-3156/)
 
@@ -10,7 +13,8 @@
 * async/await syntax [PEP 492](https://peps.python.org/pep-0492/)
 
 #### Python 3.6
-*  Asynchronous Comprehensions [PEP 530](https://peps.python.org/pep-0530/)
+* Async Generators [PEP 525](https://peps.python.org/pep-0525/)
+* Asynchronous Comprehensions [PEP 530](https://peps.python.org/pep-0530/)
 
 #### Python 3.7
 * [asyncio.run](https://docs.python.org/3.10/library/asyncio-task.html#asyncio.run)

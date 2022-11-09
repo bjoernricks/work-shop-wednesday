@@ -1,39 +1,8 @@
-### Async Generators/Iterators
+### Async Iterators
 
-#### AsyncGenerator
-
-```python
-class AsyncGenerator(AsyncIterator):
-    async def asend(self, value):
-        """
-        Send a value into the asynchronous generator.
-        Return next yielded value or raise StopAsyncIteration.
-        """
-
-    async def athrow(self, typ, val=None, tb=None):
-        """
-        Raise an exception in the asynchronous generator.
-        Return next yielded value or raise StopAsyncIteration.
-        """
-
-    async def aclose(self):
-        """
-        Raise GeneratorExit inside coroutine.
-        """
-        try:
-            await self.athrow(GeneratorExit)
-        except (GeneratorExit, StopAsyncIteration):
-            pass
-        else:
-            raise RuntimeError("asynchronous generator ignored GeneratorExit")
-
-    async def __anext__(self):
-        """
-        Return the next item from the asynchronous generator.
-        When exhausted, raise StopAsyncIteration.
-        """
-        return await self.asend(None)
-```
+`AsyncIterable` and `AsyncIterator` got introduced in conjunction with the
+async/await syntax in [PEP 492](https://peps.python.org/pep-0492/) with Python
+3.5.
 
 #### AsyncIterable
 
@@ -49,9 +18,40 @@ class AsyncIterable:
 
 ```python
 class AsyncIterator(AsyncIterable):
-    async def __anext__(self):
+    async def __anext__(self) -> Any:
         """
         Return the next item or raise StopAsyncIteration when exhausted.
         """
 ```
 
+#### `async for`
+
+A new `async for` statement is used in conjunction with `AsyncIterators`.
+
+```python
+async for TARGET in ITER:
+    BLOCK
+else:
+    BLOCK2
+```
+
+```python
+iterable = (ITER)
+iter = iterable.__aiter__()
+running = True
+while running:
+    try:
+        TARGET = await iter.__anext__()
+    except StopAsyncIteration:
+        running = False
+    else:
+        BLOCK
+else:
+    BLOCK2
+```
+
+```{admonition} Summary
+* `AsyncIterator` can be used in conjunction with the `async for` statement.
+* `AsyncIterator` can suspend on each iteration, for example to request new data
+  from the network.
+```

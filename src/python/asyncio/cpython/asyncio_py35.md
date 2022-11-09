@@ -1,4 +1,4 @@
-#### Async/Await (Python >= 3.5 < 3.7)
+#### AsyncIO - Async/Await (Python >= 3.5 < 3.7)
 
 Major change is [PEP 492 – Coroutines with async and await syntax](https://peps.python.org/pep-0492/).
 
@@ -34,3 +34,9 @@ loop.close()
 
 [Source](https://docs.python.org/3.5/library/asyncio-task.html#example-chain-coroutines)
 
+
+```{admonition} Summary
+* Explicit syntax for asyncio: async and await statements
+* No coroutine decorator
+* Native coroutines
+```

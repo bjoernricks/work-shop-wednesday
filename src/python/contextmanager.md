@@ -99,19 +99,14 @@ This is semantically equivalent to:
 
 ```python
 manager = (EXPRESSION)
-value = manager.__enter__(manager)
-hit_except = False
-
 try:
-    TARGET = value
+    TARGET = manager.__enter__(manager)
     BLOCK
 except:
-    hit_except = True
     if not manager.__exit__(*sys.exc_info()):
         raise
-finally:
-    if not hit_except:
-        manager.__exit__(None, None, None)
+else:
+    manager.__exit__(None, None, None)
 
 ```
 

@@ -47,7 +47,7 @@ loop.close()
 
 [Source](https://docs.python.org/3.4/library/asyncio-task.html#example-chain-coroutines)
 
-Looks very familiar to our [implementation](implementing.md) isn't it?
+Looks very familiar to our [implementation](../implementing.md) isn't it?
 
 
 ```{admonition} Summary

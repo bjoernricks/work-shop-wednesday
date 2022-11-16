@@ -83,6 +83,43 @@ Output:
 <async_generator object bar at 0x7f5c90e9bbc0> <class 'async_generator'>
 ```
 
+#### Issues
+
+* `yield from` is not allowed in async generator functions.
+
+```python
+async def foo():
+    for i in range(1, 10):
+        yield i
+
+
+async def bar():
+    # yield from foo() is not allowed
+    for i in foo():
+        yield i
+    yield 42
+```
+
+* You can't convert an `AsyncGenerator` or `AsyncIterator` into a sequence.
+
+```python
+async def bar():
+    yield 42
+
+
+sequence = list(bar())
+```
+
+Output:
+
+```
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: 'async_generator' object is not iterable
+```
+
+Converting isn't possible (at least at the moment) because `list` expects an
+`Iterable` and can't handle an `AsyncIterable`.
 
 ```{admonition} Summary
 * `AsyncGenerator` allows to write `async generator functions`.

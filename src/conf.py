@@ -23,6 +23,8 @@ extensions = [
     "sphinx_inline_tabs",
 ]
 
+myst_enable_extensions = ["strikethrough"]
+
 templates_path = ["_templates"]
 exclude_patterns = []
 

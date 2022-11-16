@@ -150,7 +150,7 @@ at the following table:
 
 [Source](https://trio.readthedocs.io/en/latest/tutorial.html#async-functions)
 
-Remember the [Intermediate Function Issue](../step6/index.html). It's still the
+Remember the [Intermediate Function Issue](../step6/index). It's still the
 same with native coroutine functions. You still can't call async functions from
 synchronous ones. The `async/await` syntax didn't change the situation.
 

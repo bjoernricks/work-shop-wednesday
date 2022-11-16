@@ -80,7 +80,7 @@ class Future:
         )
 
     def __iter__(self) -> Generator["Future", None, Any]:
-        yield self  # some new magic
+        yield self
         return self.result()
 
     __await__ = __iter__

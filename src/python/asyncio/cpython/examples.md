@@ -1,4 +1,8 @@
-### Examples Using asyncio
+### Examples using asyncio
+
+[Waiting in asyncio](https://hynek.me/articles/waiting-in-asyncio/) has a very
+good overview about which wait function to use when and explains all
+differences.
 
 #### Mastodon
 

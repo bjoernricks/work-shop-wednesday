@@ -1,4 +1,4 @@
-### Support for `async/await` in our own Implemenation
+### Support for `async/await` in our own Implementation
 
 So what's necessary for supporting `async/await` in our [implementation](../implementing.md)?
 Just a single line needs to be added:

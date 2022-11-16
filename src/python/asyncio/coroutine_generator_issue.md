@@ -47,6 +47,12 @@ def just_a_function():
     pass
 ```
 
+```{note}
+The Python developers chose a different solution for this problem. They
+introduced [a decorator that wraps a function in a generator](https://github.com/python/cpython/blob/3.10/Lib/asyncio/coroutines.py#L121)
+instead of raising an exception.
+```
+
 For the other issues:
 
 **Async/Await to the rescue!**

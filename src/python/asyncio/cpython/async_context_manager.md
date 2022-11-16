@@ -42,6 +42,12 @@ else:
     await manager.__aexit__(mgr, None, None, None)
 ```
 
+The best example for using an `AsyncContextManager` is creating a connection.
+While creating a protocol connection over a network the application code has to
+wait until the connection has been established. With an `AsyncContextManager`
+the code waiting for the I/O can suspend and some other task can run until the
+the connection is ready.
+
 ```{admonition} Summary
 * `AsyncContextManager` can be used in conjunction with the `async with`
   statement.

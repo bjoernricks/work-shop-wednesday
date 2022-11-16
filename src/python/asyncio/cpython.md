@@ -6,6 +6,7 @@ cpython/asyncio_py35
 cpython/asyncio_py37
 cpython/awaitable
 cpython/async_await
+cpython/own_implementation
 cpython/async_iterators
 cpython/async_generators
 cpython/async_context_manager

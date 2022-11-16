@@ -1,0 +1,17 @@
+--- future4.py	2022-11-09 12:22:03.254019054 +0100
++++ future5.py	2022-11-16 12:18:52.499094129 +0100
+@@ -17,7 +17,7 @@
+ 
+ 
+ class Future:
+-    """Return a result in the future v4"""
++    """Return a result in the future v5"""
+ 
+     _result = None
+ 
+@@ -82,3 +82,5 @@
+     def __iter__(self) -> Generator["Future", None, Any]:
+         yield self  # some new magic
+         return self.result()
++
++    __await__ = __iter__

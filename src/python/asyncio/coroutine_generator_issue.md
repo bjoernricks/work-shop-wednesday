@@ -18,8 +18,6 @@ There are some issues in the concept:
   round.
 * Users could refactor a generator function that it becomes a normal function
   (accidentally) just because `yield`/`yield from` is removed.
-* As mentioned nothings forbids to pass a normal function as a coroutine. But it
-  breaks the concept completely.
 
 
 At least changing a coroutine to a normal function can be avoided by marking

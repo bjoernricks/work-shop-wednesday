@@ -42,6 +42,3 @@ again now we have the new `async/await` syntax.
   Fixed: Can't happen with `async def`. The identity of a coroutine doesn't
   depend on a statement within the function. It is already settled during the
   function definition.
-
-* As mentioned nothings forbids to pass a normal function as a coroutine. But it
-  breaks the concept completely.

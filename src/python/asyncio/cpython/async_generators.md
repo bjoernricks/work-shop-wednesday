@@ -3,6 +3,9 @@
 Additionally to the `AsyncIterator` a `AsyncGenerator` has been introduced in
 [PEP 525](https://peps.python.org/pep-0525/) with Python 3.6.
 
+Having `async/await` instead of `yield/yield from` for coroutines allows to use
+`yield` for the initial purpose again: yielding via Generators.
+
 #### AsyncGenerator
 
 ```python
@@ -40,7 +43,7 @@ class AsyncGenerator(AsyncIterator):
 
 #### Async Generator Function
 
-What's the purpose of an `AsyncGenerator`= Mostly to implement `async generator
+What's the purpose of an `AsyncGenerator`? Mostly to implement `async generator
 functions`.
 
 An `async generator function` is an `async def` function containing

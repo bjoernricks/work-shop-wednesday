@@ -4,6 +4,11 @@
 async/await syntax in [PEP 492](https://peps.python.org/pep-0492/) with Python
 3.5.
 
+`AsyncIterators` in conjunction with the new `async for` statement allow
+iterating over items that have been requested asynchronously. That means the
+`async for` loop may suspend on every iteration until the next iteration result
+is available.
+
 #### AsyncIterable
 
 ```python

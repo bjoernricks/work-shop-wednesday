@@ -65,7 +65,38 @@ flowchart TB
    c --> join
 ```
 
-Different async based libraries are addressing this issue
+```python
+import asyncio
+
+async def coro():
+  try:
+    await asyncio.sleep(60)
+    return 42
+  except asyncio.CancelledError:
+    print("someone wants to cancel me")
+    raise
+
+
+async def other_coro():
+  return asyncio.create_task(coro())
+
+task = asyncio.run(other_coro())
+print(task)
+```
+
+Output:
+
+```
+>>> task = asyncio.run(other_coro())
+someone wants to cancel me
+>>> print(task)
+<Task cancelled name='Task-22' coro=<coro() done, defined at <stdin>:1>>
+```
+
+The task for `coro` was never awaited. It gets canceled when the loop (the
+`asyncio.run` function) finishes.
+
+Different async based libraries are addressing this issue:
  * [curio](https://curio.readthedocs.io/en/latest/tutorial.html#task-groups)
  * [trio](https://trio.readthedocs.io/en/latest/reference-core.html#nurseries-and-spawning)
 
@@ -75,10 +106,10 @@ This issue has been fixed in Python 3.11 with the introduction of
 Before:
 
 ```python
-async def main():
+async def coro():
     task1 = asyncio.create_task(some_coro(...))
     task2 = asyncio.create_task(another_coro(...))
-     # join all tasks explicitly
+     # join/await all tasks explicitly
     await asyncio.gather(task1, task2)
     print("Both tasks have completed now.")
 
@@ -87,11 +118,11 @@ async def main():
 With Python 3.11:
 
 ```python
-async def main():
+async def coro():
     async with asyncio.TaskGroup() as tg:
         task1 = tg.create_task(some_coro(...))
         task2 = tg.create_task(another_coro(...))
-    # tasks are joined automatically
+    # tasks are joined/awaited automatically
     print("Both tasks have completed now.")
 ```
 

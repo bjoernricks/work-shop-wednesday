@@ -32,5 +32,7 @@ An overview about AsyncIO related changes in Python.
 
 #### Python 3.11
 * [TaskGroup](https://docs.python.org/3.11/library/asyncio-task.html#task-groups) -> structured concurrency in asyncio
+* [timeout](https://docs.python.org/3.11/library/asyncio-task.html#asyncio.timeout)
+  and [timeout_at](https://docs.python.org/3.11/library/asyncio-task.html#asyncio.timeout_at) -> implementation of trio's cancel scope feature
 
 

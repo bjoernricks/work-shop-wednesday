@@ -13,6 +13,7 @@ cpython/async_context_manager
 cpython/coroutine_generator_issue
 cpython/issues
 cpython/examples
+cpython/gotchas
 cpython/history
 ```
 

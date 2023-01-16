@@ -55,19 +55,19 @@ wrapt = [
 
 [[package]]
 name = "autohooks"
-version = "22.11.2"
+version = "22.7.2"
 description = "Library for managing git hooks"
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "autohooks-22.11.2-py3-none-any.whl", hash = "sha256:57dcba586f0d3a57ed6c430cf6835a93f0cd74e70a8587e8bd382d6865363cda"},
-    {file = "autohooks-22.11.2.tar.gz", hash = "sha256:597f04f7dba69e42f76ff4195666bbadbaaa0cd5d14fb338e53d36025a92b66d"},
+    {file = "autohooks-22.7.2-py3-none-any.whl", hash = "sha256:8fd967717ac60ac69f09ff5deb8cfdba6dd007fa293f49903e111ce9a06d626e"},
+    {file = "autohooks-22.7.2.tar.gz", hash = "sha256:7dc86b0d85a74968f72c27d7b817978ae6f8100706f730c63321e7b59b1c75b9"},
 ]
 
 [package.dependencies]
-pontos = ">=22.8.0"
-rich = ">=12.5.1,<13.0.0"
+colorful = ">=0.5.4,<0.6.0"
+pontos = ">=22.7.0,<23.0.0"
 tomlkit = ">=0.5.11"
 
 [[package]]
@@ -760,22 +760,20 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.2.2)", "pytest (>=7.2)", "pytest-
 
 [[package]]
 name = "pontos"
-version = "23.1.0"
+version = "22.7.2"
 description = "Common utilities and tools maintained by Greenbone Networks"
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "pontos-23.1.0-py3-none-any.whl", hash = "sha256:9ff634221a729d15191bbf80e997de689978018e347e6f217f72a004c4b3dbc5"},
-    {file = "pontos-23.1.0.tar.gz", hash = "sha256:e8d91a50d586e7954c391bb1a43c640c0d392a0a2ba54f415498fabe3fb3f380"},
+    {file = "pontos-22.7.2-py3-none-any.whl", hash = "sha256:c94220096149d76682589c466ab291354b947e0457c850bdf59cde522fb71ef5"},
+    {file = "pontos-22.7.2.tar.gz", hash = "sha256:7f9efc1629ce782a9e9696277633d15ab506da15f75c365d3ec6df3cae071ad4"},
 ]
 
 [package.dependencies]
 colorful = ">=0.5.4,<0.6.0"
-httpx = {version = ">=0.23.0,<0.24.0", extras = ["http2"]}
 packaging = ">=20.3"
-python-dateutil = ">=2.8.2,<3.0.0"
-rich = ">=12.4.4,<13.0.0"
+requests = ">=2.24.0,<3.0.0"
 tomlkit = ">=0.5.11"
 
 [[package]]
@@ -822,21 +820,6 @@ typing-extensions = {version = ">=3.10.0", markers = "python_version < \"3.10\""
 [package.extras]
 spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
-
-[[package]]
-name = "python-dateutil"
-version = "2.8.2"
-description = "Extensions to the standard Python datetime module"
-category = "dev"
-optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
-files = [
-    {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
-    {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
-]
-
-[package.dependencies]
-six = ">=1.5"
 
 [[package]]
 name = "pytz"
@@ -942,14 +925,14 @@ idna2008 = ["idna"]
 
 [[package]]
 name = "rich"
-version = "12.6.0"
+version = "13.1.0"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 category = "dev"
 optional = false
-python-versions = ">=3.6.3,<4.0.0"
+python-versions = ">=3.7.0"
 files = [
-    {file = "rich-12.6.0-py3-none-any.whl", hash = "sha256:a4eb26484f2c82589bd9a17c73d32a010b1e29d89f1604cd9bf3a2097b81bb5e"},
-    {file = "rich-12.6.0.tar.gz", hash = "sha256:ba3a3775974105c221d31141f2c116f4fd65c5ceb0698657a11e9f295ec93fd0"},
+    {file = "rich-13.1.0-py3-none-any.whl", hash = "sha256:f846bff22a43e8508aebf3f0f2410ce1c6f4cde429098bd58d91fde038c57299"},
+    {file = "rich-13.1.0.tar.gz", hash = "sha256:81c73a30b144bbcdedc13f4ea0b6ffd7fdc3b0d3cc259a9402309c8e4aee1964"},
 ]
 
 [package.dependencies]

@@ -55,19 +55,19 @@ wrapt = [
 
 [[package]]
 name = "autohooks"
-version = "23.4.0"
+version = "22.7.2"
 description = "Library for managing git hooks"
 category = "dev"
 optional = false
-python-versions = ">=3.7.2,<4.0.0"
+python-versions = ">=3.7,<4.0"
 files = [
-    {file = "autohooks-23.4.0-py3-none-any.whl", hash = "sha256:2c3b8506890565ad8c9b690db9b70a9b65068ff9f1c2a2d601d2914ad576cfff"},
-    {file = "autohooks-23.4.0.tar.gz", hash = "sha256:6880ad263f0aaab607bbfc1d42afc407de6234320fcff10d75d4e89f4e711ccd"},
+    {file = "autohooks-22.7.2-py3-none-any.whl", hash = "sha256:8fd967717ac60ac69f09ff5deb8cfdba6dd007fa293f49903e111ce9a06d626e"},
+    {file = "autohooks-22.7.2.tar.gz", hash = "sha256:7dc86b0d85a74968f72c27d7b817978ae6f8100706f730c63321e7b59b1c75b9"},
 ]
 
 [package.dependencies]
-pontos = ">=22.8.0"
-rich = ">=12.5.1"
+colorful = ">=0.5.4,<0.6.0"
+pontos = ">=22.7.0,<23.0.0"
 tomlkit = ">=0.5.11"
 
 [[package]]
@@ -447,26 +447,26 @@ socks = ["socksio (>=1.0.0,<2.0.0)"]
 
 [[package]]
 name = "httpx"
-version = "0.23.3"
+version = "0.24.0"
 description = "The next generation HTTP client."
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "httpx-0.23.3-py3-none-any.whl", hash = "sha256:a211fcce9b1254ea24f0cd6af9869b3d29aba40154e947d2a07bb499b3e310d6"},
-    {file = "httpx-0.23.3.tar.gz", hash = "sha256:9818458eb565bb54898ccb9b8b251a28785dd4a55afbc23d0eb410754fe7d0f9"},
+    {file = "httpx-0.24.0-py3-none-any.whl", hash = "sha256:447556b50c1921c351ea54b4fe79d91b724ed2b027462ab9a329465d147d5a4e"},
+    {file = "httpx-0.24.0.tar.gz", hash = "sha256:507d676fc3e26110d41df7d35ebd8b3b8585052450f4097401c9be59d928c63e"},
 ]
 
 [package.dependencies]
 certifi = "*"
 h2 = {version = ">=3,<5", optional = true, markers = "extra == \"http2\""}
-httpcore = ">=0.15.0,<0.17.0"
-rfc3986 = {version = ">=1.3,<2", extras = ["idna2008"]}
+httpcore = ">=0.15.0,<0.18.0"
+idna = "*"
 sniffio = "*"
 
 [package.extras]
 brotli = ["brotli", "brotlicffi"]
-cli = ["click (>=8.0.0,<9.0.0)", "pygments (>=2.0.0,<3.0.0)", "rich (>=10,<13)"]
+cli = ["click (>=8.0.0,<9.0.0)", "pygments (>=2.0.0,<3.0.0)", "rich (>=10,<14)"]
 http2 = ["h2 (>=3,<5)"]
 socks = ["socksio (>=1.0.0,<2.0.0)"]
 
@@ -834,23 +834,20 @@ test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.2.2)", "pytest-
 
 [[package]]
 name = "pontos"
-version = "23.4.3"
+version = "22.7.2"
 description = "Common utilities and tools maintained by Greenbone Networks"
 category = "dev"
 optional = false
-python-versions = ">=3.9,<4.0"
+python-versions = ">=3.7,<4.0"
 files = [
-    {file = "pontos-23.4.3-py3-none-any.whl", hash = "sha256:e0d4436ae077f80e0c90fe6cb965ec89b98adf302d9b83570a62e133c834d74b"},
-    {file = "pontos-23.4.3.tar.gz", hash = "sha256:3356181c4293c844a35cbfbd953da92ef2832041df1f6c0ce3253b32ee31dee0"},
+    {file = "pontos-22.7.2-py3-none-any.whl", hash = "sha256:c94220096149d76682589c466ab291354b947e0457c850bdf59cde522fb71ef5"},
+    {file = "pontos-22.7.2.tar.gz", hash = "sha256:7f9efc1629ce782a9e9696277633d15ab506da15f75c365d3ec6df3cae071ad4"},
 ]
 
 [package.dependencies]
 colorful = ">=0.5.4,<0.6.0"
-httpx = {version = ">=0.23.0,<0.24.0", extras = ["http2"]}
 packaging = ">=20.3"
-python-dateutil = ">=2.8.2,<3.0.0"
-rich = ">=12.4.4"
-semver = ">=2.13,<4.0"
+requests = ">=2.24.0,<3.0.0"
 tomlkit = ">=0.5.11"
 
 [[package]]
@@ -897,21 +894,6 @@ typing-extensions = {version = ">=3.10.0", markers = "python_version < \"3.10\""
 [package.extras]
 spelling = ["pyenchant (>=3.2,<4.0)"]
 testutils = ["gitpython (>3)"]
-
-[[package]]
-name = "python-dateutil"
-version = "2.8.2"
-description = "Extensions to the standard Python datetime module"
-category = "dev"
-optional = false
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
-files = [
-    {file = "python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"},
-    {file = "python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"},
-]
-
-[package.dependencies]
-six = ">=1.5"
 
 [[package]]
 name = "pyyaml"
@@ -984,55 +966,6 @@ urllib3 = ">=1.21.1,<1.27"
 [package.extras]
 socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
-
-[[package]]
-name = "rfc3986"
-version = "1.5.0"
-description = "Validating URI References per RFC 3986"
-category = "main"
-optional = false
-python-versions = "*"
-files = [
-    {file = "rfc3986-1.5.0-py2.py3-none-any.whl", hash = "sha256:a86d6e1f5b1dc238b218b012df0aa79409667bb209e58da56d0b94704e712a97"},
-    {file = "rfc3986-1.5.0.tar.gz", hash = "sha256:270aaf10d87d0d4e095063c65bf3ddbc6ee3d0b226328ce21e036f946e421835"},
-]
-
-[package.dependencies]
-idna = {version = "*", optional = true, markers = "extra == \"idna2008\""}
-
-[package.extras]
-idna2008 = ["idna"]
-
-[[package]]
-name = "rich"
-version = "13.3.4"
-description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
-category = "dev"
-optional = false
-python-versions = ">=3.7.0"
-files = [
-    {file = "rich-13.3.4-py3-none-any.whl", hash = "sha256:22b74cae0278fd5086ff44144d3813be1cedc9115bdfabbfefd86400cb88b20a"},
-    {file = "rich-13.3.4.tar.gz", hash = "sha256:b5d573e13605423ec80bdd0cd5f8541f7844a0e71a13f74cf454ccb2f490708b"},
-]
-
-[package.dependencies]
-markdown-it-py = ">=2.2.0,<3.0.0"
-pygments = ">=2.13.0,<3.0.0"
-
-[package.extras]
-jupyter = ["ipywidgets (>=7.5.1,<9)"]
-
-[[package]]
-name = "semver"
-version = "3.0.0"
-description = "Python helper for Semantic Versioning (https://semver.org)"
-category = "dev"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "semver-3.0.0-py3-none-any.whl", hash = "sha256:ab4f69fb1d1ecfb5d81f96411403d7a611fa788c45d252cf5b408025df3ab6ce"},
-    {file = "semver-3.0.0.tar.gz", hash = "sha256:94df43924c4521ec7d307fc86da1531db6c2c33d9d5cdc3e64cca0eb68569269"},
-]
 
 [[package]]
 name = "six"
@@ -1479,4 +1412,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "79f1965a63502e53205facdad6cc29783ed9ed5812d792db874c1586015c3230"
+content-hash = "fecafa9df67779531bb7130bf864c0ed27df42ae4082ccc54e3c4763fca845ce"

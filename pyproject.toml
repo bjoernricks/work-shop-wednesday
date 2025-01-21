@@ -5,6 +5,7 @@ description = "Wednesday Workshops"
 authors = ["Björn Ricks <bjoern.ricks@greenbone.net>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.9"

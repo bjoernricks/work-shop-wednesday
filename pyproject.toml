@@ -10,7 +10,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.9"
 Sphinx = "^7.4.7"
-furo = "^2024.8.6"
+furo = "^2025.7.19"
 myst-parser = "^3.0.1"
 sphinx-copybutton = "^0.5.2"
 sphinxcontrib-mermaid = "^1.0"

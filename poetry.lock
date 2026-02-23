@@ -1067,14 +1067,14 @@ type = ["mypy (>=1.14.1)"]
 
 [[package]]
 name = "pontos"
-version = "25.8.1"
+version = "26.2.0"
 description = "Common utilities and tools maintained by Greenbone Networks"
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["dev"]
 files = [
-    {file = "pontos-25.8.1-py3-none-any.whl", hash = "sha256:9e32a3bcbdd9f9ad7274457075bffe4bc3df49083429754899a8c847bd0f9bf6"},
-    {file = "pontos-25.8.1.tar.gz", hash = "sha256:c60a8a0a6271ba173e8c0af098b4aa102ad5fcdbf6fe6857d2bf889c37899cd7"},
+    {file = "pontos-26.2.0-py3-none-any.whl", hash = "sha256:37d5dc30ea65cef9b5aa12e00997165ae906be8eef2b6c017c9eb41431bb1d71"},
+    {file = "pontos-26.2.0.tar.gz", hash = "sha256:54ed2d1532879647d6f51b94d988c4295da419f7531910b5511a100f7ed81c8b"},
 ]
 
 [package.dependencies]
@@ -1311,14 +1311,14 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "rich"
-version = "14.3.2"
+version = "14.3.3"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 optional = false
 python-versions = ">=3.8.0"
 groups = ["dev"]
 files = [
-    {file = "rich-14.3.2-py3-none-any.whl", hash = "sha256:08e67c3e90884651da3239ea668222d19bea7b589149d8014a21c633420dbb69"},
-    {file = "rich-14.3.2.tar.gz", hash = "sha256:e712f11c1a562a11843306f5ed999475f09ac31ffb64281f73ab29ffdda8b3b8"},
+    {file = "rich-14.3.3-py3-none-any.whl", hash = "sha256:793431c1f8619afa7d3b52b2cdec859562b950ea0d4b6b505397612db8d5362d"},
+    {file = "rich-14.3.3.tar.gz", hash = "sha256:b8daa0b9e4eef54dd8cf7c86c03713f53241884e814f4e2f5fb342fe520f639b"},
 ]
 
 [package.dependencies]

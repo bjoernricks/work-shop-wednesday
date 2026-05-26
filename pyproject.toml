@@ -11,10 +11,10 @@ package-mode = false
 python = "^3.12"
 Sphinx = "^7.4.7"
 furo = "^2025.12.19"
-myst-parser = "^3.0.1"
+myst-parser = ">=3.0.1,<5.0.0"
 sphinx-copybutton = "^0.5.2"
-sphinxcontrib-mermaid = "^1.2"
-sphinx-autobuild = "^2024.10.3"
+sphinxcontrib-mermaid = ">=1.2,<3.0"
+sphinx-autobuild = ">=2024.10.3,<2026.0.0"
 sphinx-inline-tabs = "^2025.12.21"
 httpx = { extras = ["http2"], version = "^0.28.1" }
 

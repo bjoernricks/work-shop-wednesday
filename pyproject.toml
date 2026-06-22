@@ -9,7 +9,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
-Sphinx = ">=7.4.7,<9.0.0"
+Sphinx = ">=7.4.7,<10.0.0"
 furo = "^2025.12.19"
 myst-parser = ">=3.0.1,<6.0.0"
 sphinx-copybutton = "^0.5.2"
